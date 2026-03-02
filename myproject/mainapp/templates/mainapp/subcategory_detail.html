@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ subcategory.name }}</title>
+    <link rel="stylesheet" href="{% static 'mainapp/css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="/">Главная</a> → 
+            <a href="/catalog/">Категории</a> → 
+            <a href="/catalog/{{ subcategory.category.id }}/">{{ subcategory.category.name }}</a> → 
+            {{ subcategory.name }}
+        </div>
+        
+        <a href="/catalog/{{ subcategory.category.id }}/" class="back">← Назад к категории</a>
+        
+        <div class="product">{{ subcategory.name }}</div>
+        
+        <div class="subcategory-list">
+            <h2>Товары в подкатегории</h2>
+            <div class="item-grid">
+                {% if subcategory.products.all %}
+                    {% for p in subcategory.products.all %}
+                    <div class="item-card">
+                        <h3>{{ p.name }}</h3>
+                        <a href="/catalog/{{ subcategory.category.id }}/{{ subcategory.id }}/{{ p.id }}/">Подробнее</a>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                <div class="no-items">
+                    <p>В этой подкатегории нет продуктов</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <script src="{% static 'mainapp/js/main.js' %}"></script>
+</body>
+</html>

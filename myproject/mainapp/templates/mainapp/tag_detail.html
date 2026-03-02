@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тег: {{ tag.name }}</title>
+    <link rel="stylesheet" href="{% static 'mainapp/css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="/">Главная</a> → 
+            <a href="/tags/">Теги</a> → 
+            {{ tag.name }}
+        </div>
+        
+        <a href="/tags/" class="back">← Назад к тегам</a>
+        
+        <div class="product">Тег: {{ tag.name }}</div>
+        
+        <div class="tag-list">
+            <h2>Товары с этим тегом</h2>
+            <div class="item-grid">
+                {% if products %}
+                    {% for product in products %}
+                    <div class="item-card">
+                        <h3>{{ product.name }}</h3>
+                        <p class="breadcrumb">
+                            <small>{{ product.subcategory.category.name }} > {{ product.subcategory.name }}</small>
+                        </p>
+                        <a href="/catalog/{{ product.subcategory.category.id }}/{{ product.subcategory.id }}/{{ product.id }}/">Подробнее</a>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                <div class="no-items">
+                    <p>Нет продуктов с этим тегом</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <script src="{% static 'mainapp/js/main.js' %}"></script>
+</body>
+</html>

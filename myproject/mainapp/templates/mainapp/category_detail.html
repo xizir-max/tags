@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ category.name }}</title>
+    <link rel="stylesheet" href="{% static 'mainapp/css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="/">Главная</a> → 
+            <a href="/catalog/">Категории</a> → 
+            {{ category.name }}
+        </div>
+        
+        <a href="/catalog/" class="back">← Назад к категориям</a>
+        
+        <div class="product">{{ category.name }}</div>
+        
+        <div class="subcategory-list">
+            <h2>Подкатегории</h2>
+            <div class="item-grid">
+                {% if category.subcategories.all %}
+                    {% for s in category.subcategories.all %}
+                    <div class="item-card">
+                        <h3>{{ s.name }}</h3>
+                        <a href="/catalog/{{ category.id }}/{{ s.id }}/">Просмотреть товары</a>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                <div class="no-items">
+                    <p>В этой категории нет подкатегорий</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <script src="{% static 'mainapp/js/main.js' %}"></script>
+</body>
+</html>

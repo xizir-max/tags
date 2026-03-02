@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная</title>
+    <link rel="stylesheet" href="{% static 'mainapp/css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Добро пожаловать в наш магазин!</h1>
+            <p class="subtitle">Откройте для себя мир качественных товаров</p>
+        </header>
+        
+        <nav class="nav">
+            <a href="/catalog/" class="catalog">🛍️ Перейти в магазин</a>
+            <a href="/tags/" class="tags">🏷️ Просмотреть теги</a>
+        </nav>
+    </div>
+    
+    <script src="{% static 'mainapp/js/main.js' %}"></script>
+</body>
+</html>
